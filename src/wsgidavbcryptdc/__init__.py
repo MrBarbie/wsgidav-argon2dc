@@ -3,4 +3,4 @@
 __version__ = "0.1.0"
 __docformat__ = "reStructuredText"
 
-from .controller import SimpleBcryptDomainController
+from .controller import SimpleArgon2DomainController # noqa: F401 # type: ignore[reportUnusedImport]

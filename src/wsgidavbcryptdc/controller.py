@@ -1,15 +1,15 @@
 from wsgidav import util
 from wsgidav.dc.base_dc import BaseDomainController
-from bcrypt import checkpw
+import argon2
 
 _logger = util.get_module_logger(__name__)
+ph = argon2.PasswordHasher()
 
-
-class SimpleBcryptDomainController(BaseDomainController):
+class SimpleArgon2DomainController(BaseDomainController):
   def __init__(self, wsgidav_app, config):
     super().__init__(wsgidav_app, config)
 
-    dc_conf = util.get_dict_value(config, "bcrypt_dc", as_dict=True)
+    dc_conf = util.get_dict_value(config, "argon2_dc", as_dict=True)
 
     self.user_map = dc_conf.get("user_mapping")
     if self.user_map is None:
@@ -18,13 +18,12 @@ class SimpleBcryptDomainController(BaseDomainController):
     for share, data in self.user_map.items():
       if type(data) not in (bool, dict) or not data:
         raise RuntimeError(
-            "Invalid option: hash_dc.user_mapping['{}']: must be True or non-empty dict.".format(
-              share
-            )
+          f"Invalid option: simple_dc.user_mapping[{share!r}]: must be True or non-empty dict."
         )
+    return
 
   def __str__(self):
-    return "{}()".format(self.__class__.__name__)
+    return f"{self.__class__.__name__}()"
 
   def _get_realm_entry(self, realm, user_name=None):
     """Return the matching user_map entry (falling back to default '*' if any)."""
@@ -45,8 +44,8 @@ class SimpleBcryptDomainController(BaseDomainController):
     realm_entry = self._get_realm_entry(realm)
     if realm_entry is None:
       _logger.error(
-          "Missing configuration hash_dc.user_mapping['{}'] (or '*'): "
-          "realm is not accessible!".format(realm)
+        f'Missing configuration simple_dc.user_mapping["{realm}"] (or "*"): '
+        "realm is not accessible!"
       )
 
     return realm_entry is not True
@@ -59,7 +58,11 @@ class SimpleBcryptDomainController(BaseDomainController):
       return False
 
     password_hash = user.get("password_hash").encode('utf-8')
-    return checkpw(password.encode('utf-8'), password_hash)
+    try:
+      ph.verify(password_hash,password.encode('utf-8'))
+      return True
+    except argon2.exceptions.VerifyMismatchError:
+      return False
 
   def supports_http_digest_auth(self):
     return False

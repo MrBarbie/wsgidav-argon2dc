@@ -1,26 +1,20 @@
-[build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
-
 [project]
-name = "wsgidav-bcryptdc"
-authors = [
-    { name = "Andreas Bannach", email = "andreas@borntohula.de" },
-]
+name = "wsgidav_argon2dc"
 readme = "README.md"
 keywords = ["wsgidav"]
 classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 requires-python = ">=3.6"
-dynamic = ["version", "description"]
+version = "0.1.0"
+description = "A wsgidav domain controller that uses argon2 hashes instead of plain text passwords. Forked from andban/wsgidav-bcryptdc"
 dependencies = [
+    "argon2-cffi>=21.3.0",
     "wsgidav >=4.0",
-    "bcrypt >=4.0"
 ]
 
 [project.urls]
-Source = "https://github.com/andban/wsgidav-bcryptdc"
+Source = "https://github.com/MrBarbie/wsgidav-argon2dc"
 
-[tool.flit.module]
-name = "wsgidavbcryptdc"
+[tool.setuptools.packages.find]
+where = ["src"]
