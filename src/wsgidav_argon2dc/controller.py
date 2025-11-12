@@ -63,6 +63,9 @@ class SimpleArgon2DomainController(BaseDomainController):
       return True
     except argon2.exceptions.VerifyMismatchError:
       return False
+    except argon2.exceptions.Argon2Error as e:
+      _logger.error(f'Issue trying to run argon2id verification: {e}')
+      return False
 
   def supports_http_digest_auth(self):
     return False
