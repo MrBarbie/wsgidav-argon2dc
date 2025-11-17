@@ -1,5 +1,5 @@
 [project]
-name = "wsgidav_argon2dc"
+name = "wsgidav-argon2dc"
 readme = "README.md"
 keywords = ["wsgidav"]
 classifiers = [
@@ -16,5 +16,6 @@ dependencies = [
 [project.urls]
 Source = "https://github.com/MrBarbie/wsgidav-argon2dc"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[build-system]
+requires = ["uv_build >= 0.9.2, <0.10.0"]
+build-backend = "uv_build"

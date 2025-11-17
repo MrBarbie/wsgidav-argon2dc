@@ -1,4 +1,4 @@
-# wsgidav_argon2dc
+# wsgidav-argon2dc
 
 An implementation of the [wsgidav](https://wsgidav.readthedocs.io/en/latest/index.html) simple-dc that uses argon2id hashes instead of plain text passwords.
 

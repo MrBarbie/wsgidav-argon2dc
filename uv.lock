@@ -945,5 +945,5 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "argon2-cffi", specifier = ">=21.3.0" },
-    { name = "wsgidav", specifier = ">=4.0" },
+    { name = "wsgidav", specifier = ">=4.3.3" },
 ]
