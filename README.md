@@ -1,4 +1,4 @@
-# wsgidav-argon2dc
+# wsgidav_argon2dc
 
 An implementation of the [wsgidav](https://wsgidav.readthedocs.io/en/latest/index.html) simple-dc that uses argon2id hashes instead of plain text passwords.
 
@@ -63,6 +63,6 @@ argon2-cffi provides a [CLI](https://argon2-cffi.readthedocs.io/en/stable/cli.ht
 2. Try different time cost options for it that still meets your goal of how long verification should take.
 3. If this time is still exceeded with time value `1` then reduce the memory parameter.
 
-RFC 9106 recommends: hash_len(l)=`32`, time_cost(t)=`1`, memory_cost(m)=`2097152` (2GiB), parallelism(p)=`4`
-while argon2-cffi defaults to : hash_len(l)=`32` time_cost(t)=`3`, memory_cost(m)=`65536` (64 MiB), parallelism(p)=`4`
-The argon2-cffi defaults are the secondary recommendation for devices with limited memory.
+RFC 9106 recommends: hash_len(l)=`32`, time_cost(t)=`1`, memory_cost(m)=`2097152` (2GiB), parallelism(p)=`4`  
+while argon2-cffi defaults to : hash_len(l)=`32` time_cost(t)=`3`, memory_cost(m)=`65536` (64 MiB), parallelism(p)=`4`  
+The argon2-cffi defaults are the secondary recommendation from RFC 9106 for devices with limited memory.
