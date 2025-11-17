@@ -10,7 +10,7 @@ version = "0.1.0"
 description = "A wsgidav domain controller that uses argon2 hashes instead of plain text passwords. Forked from andban/wsgidav-bcryptdc"
 dependencies = [
     "argon2-cffi>=21.3.0",
-    "wsgidav >=4.0",
+    "wsgidav >=4.3.3",
 ]
 
 [project.urls]

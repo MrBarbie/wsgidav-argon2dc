@@ -35,4 +35,18 @@ argon2_dc:
                 roles: ['admin']
 ```
 
-Tested to  work with wsgidav 4.3.3
+Tested to  work with wsgidav 4.3.3 using cheroot
+
+## Utilities
+
+`hash_gen_ver.py` is provided as an utility to generate and verify your hashes for your intended password.
+
+```bash
+usage: hash_gen_ver.py [-h] [-v] [-ph PWDHASH]
+
+options:
+  -h, --help            show this help message and exit
+  -v, --verify          Turn on verify mode to verify hash      
+  -ph PWDHASH, --pwdhash PWDHASH
+                        Enter hash to be verified with this flag
+```
