@@ -66,12 +66,17 @@ if __name__ == "__main__":
     cmd_args = argparser.parse_args()
 
     debug_flag = cmd_args.debug_flag
+    verify_flag = cmd_args.verify_flag
+
     if cmd_args.customhasher is not None:
         parse_customhasher_params(cmd_args.customhasher)
-    pwd_frm_usr = getpass.getpass("Password to hash/verify:")
-
-    verify_flag = cmd_args.verify_flag
+    pwd_frm_usr = getpass.getpass('Password to hash/verify:')
+    
     if verify_flag:
         verify_hash(cmd_args.pwdhash, pwd_frm_usr)
     else:
-        hash_pwd(pwd_frm_usr)
+        pwd_repeat = getpass.getpass('Confrim password:')
+        if pwd_frm_usr == pwd_repeat:
+            hash_pwd(pwd_frm_usr)
+        else:
+            print('Password did not match try again')
